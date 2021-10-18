@@ -93,7 +93,8 @@ class Convertor:
                     jk_tag = 3
                 try:
                     mxm_lv = int(root[index][1][4][0].text)
-                    jk_tag = 5  # Music with a MXM diff
+                    if mxm_lv:
+                        jk_tag = 5  # Music with a MXM diff
                 except IndexError:
                     pass
 
@@ -120,8 +121,6 @@ class Convertor:
 
         # Get jacket and raw audio
         mid_4 = str(mid).zfill(4)
-        target_jk = ('jk_%s_%d_b.png' % (mid_4, jk_tag))
-        backup_jk = ('jk_%s_1_b.png' % mid_4)
         jk_path = self.dummy_jk
         music_folder = ''
         if ad_hoc:
@@ -138,10 +137,12 @@ class Convertor:
             return
         music_path = self.music_dir + music_folder + '/'
         s3v_path = music_path + music_folder + '.s3v'
-        if os.path.exists(music_path + target_jk):
-            jk_path = music_path + target_jk
-        elif os.path.exists(music_path + backup_jk):
-            jk_path = music_path + backup_jk
+        while jk_tag > 0:
+            target_jk = ('jk_%s_%d_b.png' % (mid_4, jk_tag))
+            if os.path.exists(music_path + target_jk):
+                jk_path = music_path + target_jk
+                break
+            jk_tag -= 1
 
         # Process special tracks
         if ad_hoc:
