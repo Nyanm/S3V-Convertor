@@ -14,3 +14,5 @@ A simple one-shop SDVX music convertor 简单的一站式SDVX音乐转换器
 按理来说应该用多线程写这种东西，但是多线程好麻烦，于是单线程嗯跑，Caterpillar就是毛毛虫排成一串像是单线程嗯跑的样子（
 
 跑一趟大概15min，凑活用吧！
+
+抱着个破SHIFT-JIS还爱整个花活，F  K KONAMI
