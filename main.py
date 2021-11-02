@@ -6,10 +6,6 @@ import tkinter
 from xml.etree.cElementTree import parse
 from tkinter import filedialog
 
-
-_data_dir = ''
-_des_dir = ''
-
 test_mode = 0
 
 if test_mode:
@@ -77,12 +73,14 @@ class Convertor:
                     .replace("驫", "ā").replace("骭", "ü").replace("驩", "Ø").replace("罇", "ê").replace("曩", "è") \
                     .replace("齷", "é").replace("騫", "á").replace("曦", "à").replace("龕", "€").replace("趁", "Ǣ") \
                     .replace("蹇", "₂").replace("彜", "ū").replace("雋", "Ǜ").replace("隍", "Ü").replace("鬻", "♃") \
-                    .replace("鬥", "Ã").replace("鬆", "Ý").replace("齶", "♡").replace("齲", "❤").replace("躔", "躔")
+                    .replace("鬥", "Ã").replace("鬆", "Ý").replace("齶", "♡").replace("齲", "❤").replace("躔", "★") \
+                    .replace('釁', '🍄')
                 artist = root[index][0][3].text \
                     .replace("驫", "ā").replace("骭", "ü").replace("驩", "Ø").replace("罇", "ê").replace("曩", "è") \
                     .replace("齷", "é").replace("騫", "á").replace("曦", "à").replace("龕", "€").replace("趁", "Ǣ") \
                     .replace("蹇", "₂").replace("彜", "ū").replace("雋", "Ǜ").replace("隍", "Ü").replace("鬻", "♃") \
-                    .replace("鬥", "Ã").replace("鬆", "Ý").replace("齶", "♡").replace("齲", "❤").replace("躔", "躔")
+                    .replace("鬥", "Ã").replace("鬆", "Ý").replace("齶", "♡").replace("齲", "❤").replace("躔", "★") \
+                    .replace('釁', '🍄')
                 bpm_max = int(root[index][0][6].text) / 100
                 date = root[index][0][8].text
                 version = int(root[index][0][13].text)
