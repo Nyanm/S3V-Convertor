@@ -5,6 +5,7 @@ import eyed3
 import tkinter
 from xml.etree.cElementTree import parse
 from tkinter import filedialog
+from JIS import jis_cvt
 
 test_mode = 0
 
@@ -69,18 +70,8 @@ class Convertor:
             try:
                 mid = int(root[index].attrib['id'])
                 # Fuck Shift-JIS
-                name = root[index][0][1].text \
-                    .replace("驫", "ā").replace("骭", "ü").replace("驩", "Ø").replace("罇", "ê").replace("曩", "è") \
-                    .replace("齷", "é").replace("騫", "á").replace("曦", "à").replace("龕", "€").replace("趁", "Ǣ") \
-                    .replace("蹇", "₂").replace("彜", "ū").replace("雋", "Ǜ").replace("隍", "Ü").replace("鬻", "♃") \
-                    .replace("鬥", "Ã").replace("鬆", "Ý").replace("齶", "♡").replace("齲", "❤").replace("躔", "★") \
-                    .replace('釁', '🍄').replace('頽', 'ä').replace('黻', '*')
-                artist = root[index][0][3].text \
-                    .replace("驫", "ā").replace("骭", "ü").replace("驩", "Ø").replace("罇", "ê").replace("曩", "è") \
-                    .replace("齷", "é").replace("騫", "á").replace("曦", "à").replace("龕", "€").replace("趁", "Ǣ") \
-                    .replace("蹇", "₂").replace("彜", "ū").replace("雋", "Ǜ").replace("隍", "Ü").replace("鬻", "♃") \
-                    .replace("鬥", "Ã").replace("鬆", "Ý").replace("齶", "♡").replace("齲", "❤").replace("躔", "★") \
-                    .replace('釁', '🍄').replace('頽', 'ä').replace('黻', '*')
+                name = jis_cvt(root[index][0][1].text)
+                artist = jis_cvt(root[index][0][3].text)
                 bpm_max = int(root[index][0][6].text) / 100
                 date = root[index][0][8].text
                 version = int(root[index][0][13].text)
@@ -112,7 +103,7 @@ class Convertor:
         mid, name, artist, bpm_max, date, version, jk_tag = map_data
 
         # Exceptions for multi-source audio
-        # GekkouRanbu Kyokuken, Automation paradise(*2), TWO-TORIAL, Help me Erin(holo ver.)
+        # GekkouRanbu, Kyokuken, Automation paradise(*2), TWO-TORIAL, Help me Erin(holo ver.)
         exception = (709, 927, 1148, 1259, 1438, 1758)
         if not ad_hoc and (mid in exception):
             return
@@ -199,6 +190,7 @@ if __name__ == '__main__':
 
     cvt.process([709, '月光乱舞', 'P*Light', 186.00, '20151126', 3, 3], ad_hoc=['', ''])
     cvt.process([709, '月光乱舞', 'P*Light', 186.00, '20151126', 3, 4], ad_hoc=['4i', '月光乱舞 - Gravity Edit. - '])
+
     cvt.process([927, '極圏', 'cosMo VS dj TAKA', 207.00, '20161014', 3, 1], ad_hoc=['', ''])
     cvt.process([927, '極圏', 'cosMo VS dj TAKA', 207.00, '20161014', 3, 4], ad_hoc=['4i', '極圏 - Heavenly Edit - '])
 
@@ -225,3 +217,5 @@ if __name__ == '__main__':
         ad_hoc=['5m', 'Help me, ERINNNNNN!! #幻想郷ホロイズムver. - Noel Shirogane, Flare Shiranui Edit - '])
 
     cvt.epilogue()
+
+# pyinstaller -i bm.ico -F main.py
