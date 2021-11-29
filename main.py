@@ -5,7 +5,7 @@ import eyed3
 import tkinter
 from xml.etree.cElementTree import parse
 from tkinter import filedialog
-from JIS import jis_cvt
+from JIS import amend_jis
 
 test_mode = 0
 
@@ -70,8 +70,8 @@ class Convertor:
             try:
                 mid = int(root[index].attrib['id'])
                 # Fuck Shift-JIS
-                name = jis_cvt(root[index][0][1].text)
-                artist = jis_cvt(root[index][0][3].text)
+                name = amend_jis(root[index][0][1].text)
+                artist = amend_jis(root[index][0][3].text)
                 bpm_max = int(root[index][0][6].text) / 100
                 date = root[index][0][8].text
                 version = int(root[index][0][13].text)
